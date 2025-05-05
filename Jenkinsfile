@@ -37,7 +37,7 @@ pipeline {
             steps {
                 sh '''
                     cd mvn-java-docker && docker build -t ${DOCKER_IMAGE} .
-                    docker login -u ${env.REGISTRY_CREDENTIALS.USR} -p ${env.REGISTRY_CREDENTIALS.PSW}
+                    docker login -u ${env.REGISTRY_CREDENTIALS_USR} -p ${env.REGISTRY_CREDENTIALS_PSW}
                     docker push ${DOCKER_IMAGE}
                 '''
             }            

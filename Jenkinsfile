@@ -12,8 +12,7 @@ pipeline {
     stages {
         stage ('GIT Checkout Stage') {
             steps {
-                sh 'git clone https://github.com/yuvaraj-1991/mvn-java-docker.git'
-                sh 'echo "git check out successful"'
+              checkout scm 
             }            
         }   
         stage ('Build the Package') {

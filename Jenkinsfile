@@ -17,7 +17,7 @@ pipeline {
         }   
         stage ('Build the Package') {
             steps {
-                sh 'cd mvn-java-docker && mvn clean package'                
+                sh 'mvn clean package'                
             }            
         } 
         stage ('Static Code Analysis stage-03') {
@@ -26,13 +26,13 @@ pipeline {
             }
             steps {
                     withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
-                    sh "cd mvn-java-docker && mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}"
+                    sh "mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}"
                 }
             }
         }   
         stage ('Build and Push the Docker Image') {
             steps {
-                dir('mvn-java-docker')
+                // dir('mvn-java-docker')
                 sh """
                     docker build -t ${DOCKER_IMAGE} .
                     docker login -u ${env.REGISTRY_CREDENTIALS_USR} -p ${env.REGISTRY_CREDENTIALS_PSW}

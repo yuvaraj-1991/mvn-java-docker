@@ -10,6 +10,14 @@ pipeline {
         REGISTRY_CREDENTIALS = credentials('docker-credentials')
     }
     stages {
+        stage('Install Docker CLI') {
+            steps {
+                sh '''
+                    apt-get update
+                    apt-get install -y docker.io
+                '''
+            }
+        }
         stage ('GIT Checkout Stage') {
             steps {
               checkout scm 

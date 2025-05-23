@@ -7,7 +7,7 @@ pipeline {
     }
     environment {
         DOCKER_IMAGE = "yuv1991/java-app:${BUILD_NUMBER}"
-        REGISTRY_CREDENTIALS = credentials('docker-credentials')
+        REGISTRY_CREDENTIALS = credentials('docker-credentials-lts')
     }
     stages {
         stage('Install Docker CLI') {
